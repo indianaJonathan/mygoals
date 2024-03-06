@@ -1,20 +1,22 @@
-<h1 align="center">
-  <img width="100%" alt="Banner" title="Banner" src=".github/banner.png" />
-</h1>
+# My goals
 
-### Links
+App criado durante o evento da [Rocketseat](https://www.rocketseat.com.br/) e ministrado pelo [Rodrigo Gonçalves](https://github.com/orodrigogo)
 
-🔴 **Assista meus vídeos no YouTube:** [@orodrigogo](https://www.youtube.com/@orodrigogo)
+## Tecnologias
 
-🔴 **Figma do projeto:** [MyGoals App](https://www.figma.com/community/file/1346604660147063430)
+- React Native
+- Nativewind (Tailwind)
+- SQLite
+- dayjs
+- Typescript
+- EAS (Build)
 
----
+## Objetivo
 
-<h1 align="center">
-  <img width="100%" alt="Banner" title="App" src=".github/app.png" />
-</h1>
+O objetivo do projeto é aprimorar e apefeiçoar os meus conhecimentos utilizando React Native.
 
-### Sobre o projeto
+### Considerações
 
-Imagine que Rodrigo deseja comprar um Notebook novo que custa R$ 5.000,00. Ele acha prudente poupar o dinheiro necessário para comprar à vista, conseguir um bom preço e não comprometer o orçamento com parcelas.
-Por isso, pode usar esse App Minhas Metas para poupar até atingir sua meta financeira para adquirir um Notebook novo. Esse é um dos projetos desenvolvidos em aula do evento React Native na Prática.
+O projeto foi alterado para adicionar algumas funcionalidades e ter alguns ajustes visuais. 
+
+Foi criada uma build para android (APK) do projeto que pode ser baixado através [desse link](https://expo.dev/accounts/indianajou/projects/my-goals/builds/103921dc-bd29-4952-874c-502bf05b9df4)
