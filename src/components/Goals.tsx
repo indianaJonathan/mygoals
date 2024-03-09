@@ -5,7 +5,7 @@ import { Goal } from "@/components/Goal"
 import { colors } from "@/styles/colors"
 
 export type GoalsProps = {
-  id: string
+  id: number
   name: string
   current: number
   total: number
@@ -13,7 +13,7 @@ export type GoalsProps = {
 
 type Props = {
   goals: GoalsProps
-  onPress: (id: string) => void
+  onPress: (id: number) => void
   onAdd: () => void
 }
 

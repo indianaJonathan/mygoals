@@ -42,7 +42,7 @@ export default function Home() {
     Keyboard.dismiss();
   }
 
-  function handleDetails(id: string) {
+  function handleDetails(id: number) {
     router.navigate("/details/" + id)
   }
 
@@ -76,7 +76,12 @@ export default function Home() {
 
   async function fetchGoals() {
     try {
-      const response = useGoal.all();
+      const response = useGoal.all().map((g) => {
+        return {
+          ...g,
+          id: Number.parseInt(g.id),
+        }
+      });
       setGoals(response);
     } catch (error) {
       console.log(error)
@@ -98,6 +103,22 @@ export default function Home() {
       )
     } catch (error) {
       console.log(error)
+    }
+  }
+
+  function fetchGoalTransactions(goalId: number) {
+    try {
+      const response = useTransaction.findByGoal(goalId) ?? [];
+
+      return response.map((t) => ({
+        ...t,
+        date: dayjs(t.created_at).format("DD/MM/YYYY [às] HH:mm"),
+        onDelete: () => {
+          handleDeleteTransaction(t.id);
+        }
+      }));
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -131,17 +152,24 @@ export default function Home() {
         onPress={handleDetails}
       />
 
-      {
-        goals.length > 0 ? 
-          <Transactions transactions={transactions} />
-        :
-          <View className="flex flex-col p-12 flex-1 items-center gap-12">
-            <MaterialIcons name="arrow-circle-up" size={72} color={colors.green[700]}/>
-            <Text className="text-zinc-400 text-xl">
-              Você ainda não tem nenhuma meta criada. Comece clicando no botão verde acima
-            </Text>
-          </View>
-      }
+      <View className="flex flex-col flex-1 justify-start mt-10">
+        <View className="flex flex-col items-center justify-center py-8">
+          <Text className="text-xl text-white bg-zinc-700 p-4 rounded-md">Transações recentes</Text>
+        </View>
+      { goals.length > 0 ? 
+        goals.map((goal) => {
+          return (
+            <Transactions key={goal.id} title={goal.name} transactions= {fetchGoalTransactions(goal.id)} />
+          );
+        })
+      :
+        <View className="flex flex-col p-12 flex-1 items-center gap-12">
+          <MaterialIcons name="arrow-circle-up" size={72} color={colors.green[700]}/>
+          <Text className="text-zinc-400 text-xl">
+            Você ainda não tem nenhuma meta criada. Comece clicando no botão verde acima
+          </Text>
+        </View> }
+      </View>
 
       <BottomSheet
         ref={bottomSheetRef}

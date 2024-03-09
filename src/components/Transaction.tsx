@@ -8,6 +8,7 @@ export type TransactionProps = {
   id: number
   date: string
   amount: number
+  goal_id: number
   onDelete: (id: number) => void;
 }
 

@@ -101,7 +101,14 @@ export default function Details() {
       }
 
       if (type === "down") {
+        if (goal.percentage === 0) {
+          return Alert.alert("Erro", "Não há valor inserido nessa meta");
+        }
         amountAsNumber = amountAsNumber * -1
+      } else {
+        if (goal.percentage >= 100) {
+          return Alert.alert("Erro", "Essa meta já foi batida!");
+        }
       }
 
       useTransaction.create({ goalId, amount: amountAsNumber });

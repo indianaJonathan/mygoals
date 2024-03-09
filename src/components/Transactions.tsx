@@ -5,14 +5,15 @@ import { Transaction, TransactionProps } from "@/components/Transaction"
 export type TransactionsProps = TransactionProps[]
 
 type Props = {
-  transactions: TransactionsProps
+  title: string;
+  transactions: TransactionsProps | undefined
 }
 
-export function Transactions({ transactions }: Props) {
+export function Transactions({ title, transactions }: Props) {
   return (
-    <View className="flex-1 mt-10">
+    <View className="flex flex-col gap-2">
       <Text className="text-white font-semiBold text-base border-b border-b-gray-400 pb-3">
-        Últimas transações
+        {title}
       </Text>
 
       <FlatList

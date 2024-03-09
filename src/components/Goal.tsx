@@ -4,7 +4,7 @@ import { Progress } from "@/components/Progress"
 import { currencyFormat } from "@/utils/currencyFormat"
 
 export type GoalProps = {
-  id: string
+  id: number
   name: string
   current: number
   total: number
