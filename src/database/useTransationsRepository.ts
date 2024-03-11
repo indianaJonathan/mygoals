@@ -28,7 +28,7 @@ export function useTransactionsRepository() {
     function findByGoal(goalId: number) {
         try {
             const statement = database.prepareSync(
-                "SELECT * FROM transactions WHERE goal_id = $goal_id;"
+                "SELECT * FROM transactions WHERE goal_id = $goal_id order by created_at desc;"
             );
 
             const result = statement.executeSync<TransactionResponseDatabase>({

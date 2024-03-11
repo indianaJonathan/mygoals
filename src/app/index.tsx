@@ -20,6 +20,8 @@ import { MaterialIcons } from "@expo/vector-icons"
 import { useGoalsRepository } from "@/database/useGoalsRepository"
 import { useTransactionsRepository } from "@/database/useTransationsRepository"
 import { colors } from "@/styles/colors"
+import { ScrollView } from "react-native-gesture-handler"
+import { TransactionProps } from "@/components/Transaction"
 
 export default function Home() {
   // LISTS
@@ -152,24 +154,34 @@ export default function Home() {
         onPress={handleDetails}
       />
 
-      <View className="flex flex-col flex-1 justify-start mt-10">
+      <ScrollView
+        className="flex flex-col flex-1 mt-10"
+        contentContainerStyle={{
+          justifyContent: "flex-start"
+        }}
+        showsVerticalScrollIndicator={false}
+      >
         <View className="flex flex-col items-center justify-center py-8">
           <Text className="text-xl text-white bg-zinc-700 p-4 rounded-md">Transações recentes</Text>
         </View>
-      { goals.length > 0 ? 
-        goals.map((goal) => {
-          return (
-            <Transactions key={goal.id} title={goal.name} transactions= {fetchGoalTransactions(goal.id)} />
-          );
-        })
-      :
-        <View className="flex flex-col p-12 flex-1 items-center gap-12">
-          <MaterialIcons name="arrow-circle-up" size={72} color={colors.green[700]}/>
-          <Text className="text-zinc-400 text-xl">
-            Você ainda não tem nenhuma meta criada. Comece clicando no botão verde acima
-          </Text>
-        </View> }
-      </View>
+        { goals.length > 0 ? 
+          <View className="flex flex-col gap-4">
+            { goals.map((goal) => {
+              const goalTransactions: TransactionProps[] = fetchGoalTransactions(goal.id) ?? [];
+              const lastTransaction = goalTransactions[0];
+              return (
+                <Transactions key={goal.id} title={goal.name} total={goalTransactions.length} transactions= {goalTransactions.length > 0 ? [lastTransaction] : []} />
+              );
+            })}
+          </View>
+        :
+          <View className="flex flex-col p-12 flex-1 items-center gap-12">
+            <MaterialIcons name="arrow-circle-up" size={72} color={colors.green[700]}/>
+            <Text className="text-zinc-400 text-xl">
+              Você ainda não tem nenhuma meta criada. Comece clicando no botão verde acima
+            </Text>
+          </View> }
+      </ScrollView>
 
       <BottomSheet
         ref={bottomSheetRef}

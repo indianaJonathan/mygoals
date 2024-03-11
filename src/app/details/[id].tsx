@@ -181,10 +181,12 @@ export default function Details() {
           </Text>
         </View>
       </View>
-
-      <Transactions transactions={goal.transactions} />
-
-      <Button title="Nova transação" onPress={handleBottomSheetOpen} />
+      <View className="flex-1 mt-10 mb-10">
+        <Transactions title="Transações" transactions={goal.transactions} total={goal.transactions.length} />
+      </View>
+      <View className="w-full flex flex-col">
+        <Button title="Nova transação" onPress={handleBottomSheetOpen} />
+      </View>
 
       <BottomSheet
         ref={bottomSheetRef}
