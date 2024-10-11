@@ -45,7 +45,7 @@ export default function Home() {
   }
 
   function handleDetails(id: number) {
-    router.navigate("/details/" + id)
+    router.navigate(`/details/${id}`)
   }
 
   async function handleCreate() {
